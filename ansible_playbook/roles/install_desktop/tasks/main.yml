@@ -1,0 +1,34 @@
+---
+  - name: Install xorg, bspwm, and sxhkd
+    pacman:
+      name:
+        - bspwm
+        - sxhkd
+        - xf86-video-intel
+        - xorg-apps
+        - xorg-server
+        - xorg-xinit
+      state: present
+  
+  - name: Create paths for config files
+    file:
+      path: /home/{{ user }}/.config/{{ item }}
+      state: directory
+    with_items:
+      - sxhkd
+      - bspwm
+
+  - name: Copy xinit config file
+    copy:
+      src: bspwmrc
+      dest: /home/{{ user }}/.xinitrc
+
+  - name: Copy bspwm config file
+    copy:
+      src: bspwmrc
+      dest: /home/{{ user }}/.config/bspwm/bspwmrc
+
+  - name: Copy sxhkd config file
+    copy:
+      src: sxhkdrc
+      dest: /home/{{ user }}/.config/sxhkd/sxhkdrc 

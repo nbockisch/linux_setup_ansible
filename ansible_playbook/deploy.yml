@@ -1,0 +1,8 @@
+---
+- hosts: user_machines
+  remote_user: root
+  vars_files:
+  - user_vars
+  roles:
+  - users_and_permissions
+  - install_desktop
