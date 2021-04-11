@@ -2,6 +2,10 @@
 super + shift + Escape
   bspc quit
 
+# Terminal emulator
+super + Return
+  urxvt
+
 # Kill window
 super + shift + q
   bspc node -c

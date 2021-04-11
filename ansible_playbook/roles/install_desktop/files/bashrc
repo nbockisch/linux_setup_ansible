@@ -1,0 +1,2 @@
+# Set the prompt
+PS1='\w  '

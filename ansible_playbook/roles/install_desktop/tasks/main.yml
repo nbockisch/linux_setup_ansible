@@ -8,27 +8,133 @@
         - xorg-apps
         - xorg-server
         - xorg-xinit
+        - xorg-xrandr
       state: present
   
+  - name: Install basic applications
+    pacman:
+      name:
+        - acpi
+        - alsa-utils
+        - base-devel
+        - feh
+        - git
+        - imagemagick
+        - networkmanager
+        - pulseaudio
+        - pulseaudio-bluetooth
+        - python-pip
+        - rofi
+        - rxvt-unicode
+        - vim
+      state: present
+ 
+  - name: Install pywal
+    pip:
+      name: pywal
+  
+  - name: Install normal fonts
+    pacman:
+      name:
+        - ttf-hack
+        - wqy-microhei
+      state: present
+
+  - name: Clone aur software repos
+    become: yes
+    become_user: "{{ user }}"
+    git:
+      repo: 'https://aur.archlinux.org/{{ item }}.git'
+      dest: /home/{{ user }}/git_software/{{ item }}/
+    with_items:
+      - nerd-fonts-hack
+      - lemonbar-xft-git
+ 
+  - name: Install aur software
+    become: yes
+    become_user: "{{ user }}"
+    command: makepkg -si --noconfirm --noprogressbar
+    args:
+      chdir: /home/{{ user }}/git_software/{{ item }}/
+    with_items:
+      - nerd-fonts-hack
+      - lemonbar-xft-git
+  
   - name: Create paths for config files
+    become: yes
+    become_user: "{{ user }}"
     file:
       path: /home/{{ user }}/.config/{{ item }}
       state: directory
     with_items:
-      - sxhkd
       - bspwm
+      - lemonbar
+      - rofi
+      - sxhkd
+      - urxvt
 
-  - name: Copy xinit config file
+  - name: Copy bashrc config file
+    become: yes
+    become_user: "{{ user }}"
     copy:
-      src: bspwmrc
-      dest: /home/{{ user }}/.xinitrc
-
+      src: bashrc
+      dest: /home/{{ user }}/.bashrc
+ 
   - name: Copy bspwm config file
+    become: yes
+    become_user: "{{ user }}"
     copy:
       src: bspwmrc
       dest: /home/{{ user }}/.config/bspwm/bspwmrc
+      mode: '0755'
+
+  - name: Copy lemonbar config file
+    become: yes
+    become_user: "{{ user }}"
+    copy:
+      src: bar.sh
+      dest: /home/{{ user }}/.config/lemonbar/bar.sh
+      mode: '0755'
+  
+  - name: Copy rofi config file
+    become: yes
+    become_user: "{{ user }}"
+    copy:
+      src: config.rasi
+      dest: /home/{{ user }}/.config/rofi/config.rasi
 
   - name: Copy sxhkd config file
+    become: yes
+    become_user: "{{ user }}"
     copy:
       src: sxhkdrc
       dest: /home/{{ user }}/.config/sxhkd/sxhkdrc 
+      mode: '0755'
+  
+  - name: Copy xinit config file
+    become: yes
+    become_user: "{{ user }}"
+    copy:
+      src: xinitrc
+      dest: /home/{{ user }}/.xinitrc
+
+  - name: Copy xresources config file
+    become: yes
+    become_user: "{{ user }}"
+    copy:
+      src: Xresources
+      dest: /home/{{ user }}/.config/urxvt/Xresources
+  
+  - name: Create path for wallpapers
+    become: yes
+    become_user: "{{ user }}"
+    file:
+      path: /home/{{ user }}/pictures/wallpapers
+      state: directory
+
+  - name: Copy wallpaper
+    become: yes
+    become_user: "{{ user }}"
+    copy:
+      src: observatory.png
+      dest: /home/{{ user }}/pictures/wallpapers

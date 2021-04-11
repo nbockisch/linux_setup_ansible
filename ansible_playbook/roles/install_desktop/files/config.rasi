@@ -1,0 +1,37 @@
+configuration {
+        show-icons: false;
+        disable-history:        true;
+        lines: 7;
+        margin: 0;
+        columns: 1;
+        font: "SFMono Nerd Font 10";
+        bw: 0;
+        eh: 1;
+        auto-select: false;
+        line-margin: 0;
+        separator-style: "solid";
+        hide-scrollbar: true;
+}
+* {
+    active-foreground: @foreground;
+    normal-background: @background;
+    normal-foreground: @foreground;
+    urgent-foreground: @foreground;
+
+    alternate-active-background: @background;
+    alternate-active-foreground: @foreground;
+    alternate-normal-background: @background;
+    alternate-normal-foreground: @foreground;
+    alternate-urgent-background: @background;
+    alternate-urgent-foreground: @foreground;
+
+    selected-active-foreground: @foreground;
+    selected-normal-foreground: @foreground;
+    selected-urgent-foreground: @foreground;
+
+    background-color: @background;
+    border-color: @foreground;
+    spacing: 2;
+}
+
+@import "~/.cache/wal/colors-rofi-dark.rasi"
