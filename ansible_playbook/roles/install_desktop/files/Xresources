@@ -1,7 +1,12 @@
+*.font: xft:Hack Nerd Font Mono:size=12
+
+Xft.dpi: 96
+Xft.antialias: 1
+Xft.lcdfilter: lcdlight
+Xft.rgba: rgb
+
 URxvt.clipboard.autocopy: true
 URxvt.scrollBar: false
-URxvt.font: xft:Hack Regular Nerd Font Complete Mono:size=12
-URxvt.font: xft:Hack:size=12
 URxvt.letterSpace: -1
 URxvt.termName: rxvt-256color
 URxvt.internalBorder: 20

@@ -15,12 +15,12 @@ super + {h,j,k,l}
   bspc node -f {west,south,north,east}
 
 # Send window to desktop
-super + shift + {0-9}
-  bspc node -d {0-9}
+super + shift + {1-9}
+  bspc node -d {1-9}
 
 # Send window to desktop and swap to desktop
-super + control + {0-9}
-  bspc node -d {0-9} && bspc desktop -f {0-9}
+super + control + {1-9}
+  bspc node -d {1-9} && bspc desktop -f {1-9}
 
 # Toggle fullscreen on and off
 super + f
@@ -28,11 +28,11 @@ super + f
 
 # Swap window with direction
 super + shift + {h,j,k,l}
-  bspc node -s {west,south,north,east
+  bspc node -s {west,south,north,east}
 
 # Focus on desktop
-super + {0-9}
-  bspc desktop -f {0-9}
+super + {1-9}
+  bspc desktop -f {1-9}
 
 # Expand a window from a direction
 ctrl + alt + {h,j,k,l}

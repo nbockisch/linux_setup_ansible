@@ -20,8 +20,11 @@
         - feh
         - git
         - imagemagick
+        - make
+        - net-tools
         - networkmanager
         - pulseaudio
+        - pulseaudio-alsa
         - pulseaudio-bluetooth
         - python-pip
         - rofi
@@ -48,7 +51,8 @@
       dest: /home/{{ user }}/git_software/{{ item }}/
     with_items:
       - nerd-fonts-hack
-      - lemonbar-xft-git
+      - polybar
+#      - lemonbar-xft-git
  
   - name: Install aur software
     become: yes
@@ -58,7 +62,8 @@
       chdir: /home/{{ user }}/git_software/{{ item }}/
     with_items:
       - nerd-fonts-hack
-      - lemonbar-xft-git
+      - polybar
+#      - lemonbar-xft-git
   
   - name: Create paths for config files
     become: yes
@@ -88,13 +93,16 @@
       dest: /home/{{ user }}/.config/bspwm/bspwmrc
       mode: '0755'
 
-  - name: Copy lemonbar config file
+  - name: Copy polybar config file
     become: yes
     become_user: "{{ user }}"
     copy:
-      src: bar.sh
-      dest: /home/{{ user }}/.config/lemonbar/bar.sh
+      src: "{{ item }}"
+      dest: /home/{{ user }}/.config/polybar/{{ item }}
       mode: '0755'
+    with_items:
+      - config
+      - start_bar.sh
   
   - name: Copy rofi config file
     become: yes
