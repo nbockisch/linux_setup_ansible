@@ -46,6 +46,10 @@ super + g
 super + s
   bspc node -s smallest.window
 
+# Move floating window
+super + {Left,Down,Up,Right}
+  bspc node -v {-20 0,0 20,0 -20,20 0}
+
 # Focus on desktop
 super + {1-9}
   bspc desktop -f {1-9}

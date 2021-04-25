@@ -63,6 +63,13 @@
       repo: 'https://github.com/jluttine/rofi-power-menu.git'
       dest: /home/{{ user }}/git_software/rofi-power-menu/
 
+  - name: Clone urxvt font size extension
+    become: yes
+    become_user: "{{ user }}"
+    git:
+      repo: 'https://github.com/majutsushi/urxvt-font-size.git'
+      dest: /home/{{ user }}/git_software/urxvt-font-size/
+
   - name: Install aur software
     become: yes
     become_user: "{{ user }}"
@@ -87,6 +94,13 @@
       - rofi
       - sxhkd
       - urxvt
+
+  - name: Create path for urxvt extensions
+    become: yes
+    become_user: "{{ user }}"
+    file:
+      path: /home/{{ user }}/.urxvt/ext
+      state: directory
 
   - name: Copy bashrc config file
     become: yes
@@ -134,6 +148,13 @@
       remote_src: yes
       src: /home/{{ user }}/git_software/rofi-power-menu/rofi-power-menu
       dest: /usr/local/bin/rofi-power-menu
+      mode: '0755'
+
+  - name: Copy urxvt font size script
+    copy:
+      remote_src: yes
+      src: /home/{{ user }}/git_software/urxvt-font-size/font-size
+      dest: /home/{{ user }}/.urxvt/ext/font-size
       mode: '0755'
 
   - name: Copy sxhkd config file
