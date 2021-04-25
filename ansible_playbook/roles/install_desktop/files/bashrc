@@ -1,3 +1,2 @@
 # Set the prompt
 PS1='\w  '
-wal -R >> /dev/null

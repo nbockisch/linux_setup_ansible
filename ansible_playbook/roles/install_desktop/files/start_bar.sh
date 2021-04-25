@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 
-DEFAULT_NETWORK_INTERFACE=$(ip route | grep '^default' | awk '{print $5}' | head -n1)
+export DEFAULT_NETWORK_INTERFACE=$(ip route | grep '^default' | awk '{print $5}' | head -n1)
 
-BATTERY = $(ls -1 /sys/class/power_supply/ | tail -1)
-ADAPTER = $(ls -1 /sys/class/power_supply/ | head -1)
+export BATTERY = $(ls -1 /sys/class/power_supply/ | tail -1)
+export ADAPTER = $(ls -1 /sys/class/power_supply/ | head -1)
 
 # Terminate already running bar instances
 killall -q polybar

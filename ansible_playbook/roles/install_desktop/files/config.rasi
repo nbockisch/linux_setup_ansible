@@ -4,7 +4,7 @@ configuration {
         lines: 7;
         margin: 0;
         columns: 1;
-        font: "SFMono Nerd Font 10";
+        font: "Hack Nerd Font Mono 10";
         bw: 0;
         eh: 1;
         auto-select: false;
@@ -34,4 +34,17 @@ configuration {
     spacing: 2;
 }
 
-@import "~/.cache/wal/colors-rofi-dark.rasi"
+#window {
+    location: north;
+    width: 50%;
+    y-offset: 30px;
+    background-color: @background;
+    padding: 5;
+}
+
+#mainbox {
+    border: 0;
+    padding: 5;
+}
+
+@import "~/.cache/wal/colors-rofi-light.rasi"

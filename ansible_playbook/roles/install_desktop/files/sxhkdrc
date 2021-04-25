@@ -30,6 +30,22 @@ super + f
 super + shift + {h,j,k,l}
   bspc node -s {west,south,north,east}
 
+# Flip the tree from the current nodes parent
+alt + shift + {h,j,k,l}
+   bspc node @parent -F {vertical,horizontal,horizontal,vertical}
+
+# Preselect window direction
+super + ctrl + {h,j,k,l}
+  bspc node -p {west,south,north,east}
+
+# Swap node with biggest node
+super + g
+  bspc node -s biggest.window
+
+# Swap node with smallest node
+super + s
+  bspc node -s smallest.window
+
 # Focus on desktop
 super + {1-9}
   bspc desktop -f {1-9}
@@ -39,6 +55,25 @@ ctrl + alt + {h,j,k,l}
   bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 
 # Contract a window from a direction
-ctrl + alt + {h,j,k,l}
+ctrl + alt + shift + {h,j,k,l}
   bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
+# Launch rofi launcher
+super + d
+  rofi -show run
+
+# Launch rofi power menu
+super + p
+  rofi -show power-menu -modi power-menu:rofi-power-menu
+
+# Change screen brightness
+XF86MonBrightness{Up,Down}
+  xbacklight {-inc,-dec} 10
+
+# Change volume
+XF86Audio{Raise,Lower}Volume
+  amixer sset Master 5%{+,-}
+
+# Mute volume
+XF86AudioMute
+  amixer sset Master 0%

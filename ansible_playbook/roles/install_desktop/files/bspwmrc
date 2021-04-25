@@ -1,5 +1,7 @@
 #! /bin/sh
 
+killall -q picom
+
 pgrep -x sxhkd > /dev/null || sxhkd &
 
 bspc monitor -d 1 2 3 4 5 6 7 8 9
@@ -28,3 +30,6 @@ bspc config gapless_monocle      true
 # Start bar
 ${HOME}/.config/polybar/start_bar.sh
 #${HOME}/.config/lemonbar/bar.sh | lemonbar -f "Hack Regular Nerd Font Complete:normal:size=10" -g 264x30+15+10
+
+# Start picom
+picom -Cc &

@@ -23,6 +23,7 @@
         - make
         - net-tools
         - networkmanager
+        - picom
         - pulseaudio
         - pulseaudio-alsa
         - pulseaudio-bluetooth
@@ -50,10 +51,17 @@
       repo: 'https://aur.archlinux.org/{{ item }}.git'
       dest: /home/{{ user }}/git_software/{{ item }}/
     with_items:
+      - librewolf-bin
       - nerd-fonts-hack
       - polybar
-#      - lemonbar-xft-git
- 
+
+  - name: Clone rofi power menu
+    become: yes
+    become_user: "{{ user }}"
+    git:
+      repo: 'https://github.com/jluttine/rofi-power-menu.git'
+      dest: /home/{{ user }}/git_software/rofi-power-menu/
+
   - name: Install aur software
     become: yes
     become_user: "{{ user }}"
@@ -61,10 +69,10 @@
     args:
       chdir: /home/{{ user }}/git_software/{{ item }}/
     with_items:
+      - librewolf-bin
       - nerd-fonts-hack
       - polybar
-#      - lemonbar-xft-git
-  
+
   - name: Create paths for config files
     become: yes
     become_user: "{{ user }}"
@@ -74,6 +82,7 @@
     with_items:
       - bspwm
       - lemonbar
+      - picom
       - rofi
       - sxhkd
       - urxvt
@@ -93,6 +102,14 @@
       dest: /home/{{ user }}/.config/bspwm/bspwmrc
       mode: '0755'
 
+  - name: Copy picom config file
+    become: yes
+    become_user: "{{ user }}"
+    copy:
+      src: picom.conf
+      dest: /home/{{ user }}/.config/picom/picom.conf
+      mode: '0755'
+
   - name: Copy polybar config file
     become: yes
     become_user: "{{ user }}"
@@ -110,6 +127,13 @@
     copy:
       src: config.rasi
       dest: /home/{{ user }}/.config/rofi/config.rasi
+
+  - name: Copy rofi power menu mode
+    copy:
+      remote_src: yes
+      src: /home/{{ user }}/git_software/rofi-power-menu/rofi-power-menu
+      dest: /usr/local/bin/rofi-power-menu
+      mode: '0755'
 
   - name: Copy sxhkd config file
     become: yes
