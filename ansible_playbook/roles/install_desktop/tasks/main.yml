@@ -53,6 +53,7 @@
       repo: 'https://aur.archlinux.org/{{ item }}.git'
       dest: /home/{{ user }}/git_software/{{ item }}/
     with_items:
+      - freetube-bin
       - librewolf-bin
       - nerd-fonts-hack
       - polybar
@@ -78,6 +79,7 @@
     args:
       chdir: /home/{{ user }}/git_software/{{ item }}/
     with_items:
+      - freetube-bin
       - librewolf-bin
       - nerd-fonts-hack
       - polybar
