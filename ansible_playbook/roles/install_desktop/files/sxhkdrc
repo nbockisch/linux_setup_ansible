@@ -80,4 +80,4 @@ XF86Audio{Raise,Lower}Volume
 
 # Mute volume
 XF86AudioMute
-  amixer sset Master 0%
+  amixer sset Master toggle 

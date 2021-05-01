@@ -24,6 +24,7 @@
         - net-tools
         - networkmanager
         - nnn
+        - pavucontrol
         - picom
         - pulseaudio
         - pulseaudio-alsa
@@ -91,6 +92,7 @@
       - bspwm
       - lemonbar
       - picom
+      - polybar
       - rofi
       - sxhkd
       - urxvt
@@ -190,5 +192,5 @@
     become: yes
     become_user: "{{ user }}"
     copy:
-      src: observatory.png
+      src: broken_antennas.jpg
       dest: /home/{{ user }}/pictures/wallpapers

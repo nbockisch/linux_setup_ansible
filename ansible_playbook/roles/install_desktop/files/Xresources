@@ -1,4 +1,3 @@
-# Enable extensions
 URxvt.perl-ext-common: font-size
 
 *.font: xft:Hack Nerd Font Mono:size=12

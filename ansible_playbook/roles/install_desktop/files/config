@@ -20,7 +20,7 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 1
 
-modules-right = network battery
+modules-right = pulseaudio network battery
 modules-center = date
 modules-left = workspaces
 
@@ -102,3 +102,13 @@ label-active = 
 label-occupied = 
 label-urgent = 
 label-empty = 
+
+[module/pulseaudio]
+type = internal/pulseaudio
+use-ui-max = false
+format-volume = <ramp-volume> <label-volume>
+
+label-muted = ﱝ muted
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
