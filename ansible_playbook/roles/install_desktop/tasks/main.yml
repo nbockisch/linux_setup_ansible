@@ -106,12 +106,15 @@
       path: /home/{{ user }}/.urxvt/ext
       state: directory
 
-  - name: Copy bashrc config file
+  - name: Copy bashrc and vimrc config files
     become: yes
     become_user: "{{ user }}"
     copy:
-      src: bashrc
-      dest: /home/{{ user }}/.bashrc
+      src: "{{ item }}"
+      dest: /home/{{ user }}/.{{ item }}
+    with_items:
+      - bashrc
+      - vimrc
  
   - name: Copy bspwm config file
     become: yes
