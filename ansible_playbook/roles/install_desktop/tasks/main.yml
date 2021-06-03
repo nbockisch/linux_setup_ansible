@@ -18,12 +18,14 @@
         - alsa-utils
         - base-devel
         - feh
+        - firefox
         - git
         - imagemagick
         - make
         - net-tools
         - networkmanager
         - nnn
+        - nvim
         - pavucontrol
         - picom
         - pulseaudio
@@ -32,7 +34,6 @@
         - python-pip
         - rofi
         - rxvt-unicode
-        - vim
       state: present
  
   - name: Install pywal
@@ -54,7 +55,6 @@
       dest: /home/{{ user }}/git_software/{{ item }}/
     with_items:
       - freetube-bin
-      - librewolf-bin
       - nerd-fonts-hack
       - polybar
 
@@ -80,7 +80,6 @@
       chdir: /home/{{ user }}/git_software/{{ item }}/
     with_items:
       - freetube-bin
-      - librewolf-bin
       - nerd-fonts-hack
       - polybar
 
@@ -122,6 +121,22 @@
     copy:
       src: bspwmrc
       dest: /home/{{ user }}/.config/bspwm/bspwmrc
+      mode: '0755'
+
+  - name: Copy firefox directory
+    become: yes
+    become_user: "{{ user }}"
+    copy:
+      src: mozilla
+      dest: /home/{{ user }}/.mozilla
+      mode: '0755'
+
+  - name: Copy nvim directory
+    become: yes
+    become_user: "{{ user }}"
+    copy:
+      src: nvim
+      dest: /home/{{ user }}/.config/nvim
       mode: '0755'
 
   - name: Copy picom config file
