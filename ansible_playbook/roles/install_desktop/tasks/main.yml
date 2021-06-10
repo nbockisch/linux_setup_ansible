@@ -25,7 +25,7 @@
         - net-tools
         - networkmanager
         - nnn
-        - nvim
+        - neovim
         - pavucontrol
         - picom
         - pulseaudio
