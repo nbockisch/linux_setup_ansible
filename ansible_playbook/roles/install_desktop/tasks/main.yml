@@ -127,8 +127,8 @@
     become: yes
     become_user: "{{ user }}"
     copy:
-      src: mozilla
-      dest: /home/{{ user }}/.mozilla
+      src: .mozilla
+      dest: /home/{{ user }}/
       mode: '0755'
 
   - name: Copy nvim directory
@@ -136,7 +136,7 @@
     become_user: "{{ user }}"
     copy:
       src: nvim
-      dest: /home/{{ user }}/.config/nvim
+      dest: /home/{{ user }}/.config/
       mode: '0755'
 
   - name: Copy picom config file
