@@ -1,6 +1,10 @@
-# Quit/restart bspwm
+# Quit bspwm
 super + shift + Escape
   bspc quit
+
+# Restart bspwm
+super + r 
+  bspc wm -r
 
 # Terminal emulator
 super + Return
