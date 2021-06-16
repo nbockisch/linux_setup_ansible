@@ -25,7 +25,6 @@
         - net-tools
         - networkmanager
         - nnn
-        - neovim
         - pavucontrol
         - picom
         - pulseaudio
@@ -105,7 +104,7 @@
       path: /home/{{ user }}/.urxvt/ext
       state: directory
 
-  - name: Copy bashrc and vimrc config files
+  - name: Copy bashrc config file
     become: yes
     become_user: "{{ user }}"
     copy:
@@ -113,7 +112,6 @@
       dest: /home/{{ user }}/.{{ item }}
     with_items:
       - bashrc
-      - vimrc
  
   - name: Copy bspwm config file
     become: yes
@@ -121,22 +119,6 @@
     copy:
       src: bspwmrc
       dest: /home/{{ user }}/.config/bspwm/bspwmrc
-      mode: '0755'
-
-  - name: Copy firefox directory
-    become: yes
-    become_user: "{{ user }}"
-    copy:
-      src: .mozilla
-      dest: /home/{{ user }}/
-      mode: '0755'
-
-  - name: Copy nvim directory
-    become: yes
-    become_user: "{{ user }}"
-    copy:
-      src: nvim
-      dest: /home/{{ user }}/.config/
       mode: '0755'
 
   - name: Copy picom config file
