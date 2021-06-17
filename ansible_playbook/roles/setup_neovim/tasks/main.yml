@@ -2,9 +2,9 @@
   - name: Install neovim and fzf dependencies
     pacman:
       name:
+        - fzf
         - neovim
         - perl
-        - fzf
         - ripgrep
       state: present
   
@@ -14,13 +14,14 @@
     shell:
       cmd: curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   
-  - name: Create path for undo and neovim plugins
+  - name: Create path for undo, plugins, and plugin settings
     become: yes
     become_user: "{{ user }}"
     file:
       path: /home/{{ user }}/.config/nvim/{{ item }}
       state: directory
     with_items:
+      - plug-settings 
       - undodir
       - vim-plug
 
@@ -38,6 +39,14 @@
     copy:
       src: plugins.vim
       dest: /home/{{ user }}/.config/nvim/vim-plug/plugins.vim
+      mode: '0755'
+
+  - name: Copy vim fzf config file
+    become: yes
+    become_user: "{{ user }}"
+    copy:
+      src: fzf-conf.vim
+      dest: /home/{{ user }}/.config/nvim/plug-settings/fzf-conf.vim
       mode: '0755'
 
   - name: Install neovim plugins 

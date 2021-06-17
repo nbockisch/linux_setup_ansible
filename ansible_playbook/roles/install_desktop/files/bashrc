@@ -1,2 +1,10 @@
 # Set the prompt
 PS1='\w  '
+
+# Vars
+EDITOR=nvim
+
+# ----- Custom functions -----
+sd() { cd $(fd -Hat d | fzf) ;} # Search dirs from current dir
+ef() { $EDITOR $(fzf) ;} # Edit files from current dir
+vf() { less $(fzf) ;} # View files from current dir

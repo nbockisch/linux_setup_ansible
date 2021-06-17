@@ -17,8 +17,10 @@
         - acpi
         - alsa-utils
         - base-devel
+        - fd
         - feh
         - firefox
+        - fzf
         - git
         - imagemagick
         - make

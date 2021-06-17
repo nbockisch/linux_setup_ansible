@@ -1,6 +1,3 @@
-" Source plugins
-source $HOME/.config/nvim/vim-plug/plugins.vim
-
 " Tab settings
 set tabstop=4 softtabstop=4
 set shiftwidth=4
@@ -8,19 +5,20 @@ set expandtab
 set smartindent
 
 " For info on any of these, type 'help <command>' i.e. 'help exrc'
+set colorcolumn=80
 set exrc
-set number relativenumber
-set nohlsearch
 set hidden
+set incsearch
+set nocompatible
 set noerrorbells
-set nowrap
+set nohlsearch
 set noswapfile
+set nowrap
+set number relativenumber
+set scrolloff=8
+set signcolumn=yes
 set undodir=~/.config/nvim/undodir
 set undofile
-set incsearch
-set scrolloff=8
-set colorcolumn=80
-set signcolumn=yes
 
 " Netrw settings
 let g:netrw_liststyle=3
@@ -36,11 +34,14 @@ set statusline+=\ %M
 set statusline+=\ %y
 set statusline+=\ %F
 set statusline+=%= " Right-allignment
+set statusline+=\ [%b:%B]
 set statusline+=\ %c:%l/%L
 set statusline+=\ %p%%
 set statusline+=\ [%n]
 
 " ---------- Keyboard bindings ---------- 
+let mapleader = " "
+
 " Tab bindings
 nnoremap <Tab> gt
 nnoremap <S-Tab> gT
@@ -53,3 +54,7 @@ nnoremap <Up> :resize +2<CR>
 nnoremap <Down> :resize -2<CR>
 nnoremap <Left> :vertical resize +2<CR>
 nnoremap <Right> :vertical resize -2<CR>
+
+" Source plugins
+source $HOME/.config/nvim/vim-plug/plugins.vim
+source $HOME/.config/nvim/plug-settings/fzf-conf.vim
