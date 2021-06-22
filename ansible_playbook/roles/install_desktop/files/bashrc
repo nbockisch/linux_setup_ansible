@@ -4,6 +4,10 @@ PS1='\w  '
 # Vars
 EDITOR=nvim
 
+# ----- Aliases ----- 
+alias vim='nvim'
+alias vi='nvim'
+
 # ----- Custom functions -----
 sd() { cd $(fd -Hat d | fzf) ;} # Search dirs from current dir
 ef() { $EDITOR $(fzf) ;} # Edit files from current dir

@@ -1,5 +1,7 @@
 call plug#begin('~/.config/nvim/autoload/plugged')
-    
+
+    " Pywal color scheme
+    Plug 'dylanaraps/wal.vim'
     " Better syntax support
     Plug 'sheerun/vim-polyglot'
     " Auto pairs for braces

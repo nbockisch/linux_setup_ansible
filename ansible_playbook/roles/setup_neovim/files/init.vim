@@ -45,9 +45,9 @@ let mapleader = " "
 " Tab bindings
 nnoremap <Tab> gt
 nnoremap <S-Tab> gT
-nnoremap <Silent> <A-t> :tabnew<CR>
-nnoremap <Silent> <A-h> :tabmove -<CR>
-nnoremap <Silent> <A-l> :tabmove +<CR>
+nnoremap <silent> <A-t> :tabnew<CR>
+nnoremap <silent> <A-h> :tabmove -<CR>
+nnoremap <silent> <A-l> :tabmove +<CR>
 
 " Split resize
 nnoremap <Up> :resize +2<CR>
@@ -58,3 +58,5 @@ nnoremap <Right> :vertical resize -2<CR>
 " Source plugins
 source $HOME/.config/nvim/vim-plug/plugins.vim
 source $HOME/.config/nvim/plug-settings/fzf-conf.vim
+
+colorscheme wal
