@@ -59,4 +59,7 @@ nnoremap <Right> :vertical resize -2<CR>
 source $HOME/.config/nvim/vim-plug/plugins.vim
 source $HOME/.config/nvim/plug-settings/fzf-conf.vim
 
+" Exit terminal mode with ESC
+tnoremap <ESC> <C-\><C-n>
+
 colorscheme wal
