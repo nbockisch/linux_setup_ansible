@@ -41,13 +41,16 @@
       dest: /home/{{ user }}/.config/nvim/vim-plug/plugins.vim
       mode: '0755'
 
-  - name: Copy vim fzf config file
+  - name: Copy vim plugin config files
     become: yes
     become_user: "{{ user }}"
     copy:
-      src: fzf-conf.vim
-      dest: /home/{{ user }}/.config/nvim/plug-settings/fzf-conf.vim
+      src: "{{ item }}"
+      dest: /home/{{ user }}/.config/nvim/plug-settings/
       mode: '0755'
+    with_items:
+      - fzf-conf.vim
+      - polyglot-conf.vim
 
   - name: Install neovim plugins 
     become: yes

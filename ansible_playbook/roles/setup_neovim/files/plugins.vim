@@ -1,5 +1,7 @@
 call plug#begin('~/.config/nvim/autoload/plugged')
 
+    " Be able to surround text with char
+    Plug 'tpope/vim-surround'
     " Pywal color scheme
     Plug 'dylanaraps/wal.vim'
     " Better syntax support

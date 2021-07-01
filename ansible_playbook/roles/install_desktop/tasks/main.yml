@@ -35,6 +35,7 @@
         - python-pip
         - rofi
         - rxvt-unicode
+        - xdo # For bspwm swallow
       state: present
  
   - name: Install pywal
@@ -66,6 +67,13 @@
       repo: 'https://github.com/jluttine/rofi-power-menu.git'
       dest: /home/{{ user }}/git_software/rofi-power-menu/
 
+  - name: Clone bspwm swallowing 
+    become: yes
+    become_user: "{{ user }}"
+    git:
+      repo: 'https://github.com/salman-abedin/bspwm_swallow.git'
+      dest: /home/{{ user }}/git_software/bspwm_swallow/
+        
   - name: Clone urxvt font size extension
     become: yes
     become_user: "{{ user }}"
@@ -155,6 +163,11 @@
       src: /home/{{ user }}/git_software/rofi-power-menu/rofi-power-menu
       dest: /usr/local/bin/rofi-power-menu
       mode: '0755'
+
+  - name: Install bspwm swallow 
+    make:
+      chdir: /home/{{ user }}/git_software/bspwm_swallow/
+      target: install
 
   - name: Copy urxvt font size script
     copy:

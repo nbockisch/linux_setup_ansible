@@ -58,6 +58,7 @@ nnoremap <Right> :vertical resize -2<CR>
 " Source plugins
 source $HOME/.config/nvim/vim-plug/plugins.vim
 source $HOME/.config/nvim/plug-settings/fzf-conf.vim
+source $HOME/.config/nvim/plug-settings/polyglot-conf.vim
 
 " Exit terminal mode with ESC
 tnoremap <ESC> <C-\><C-n>
