@@ -27,6 +27,7 @@
         - net-tools
         - networkmanager
         - nnn
+        - pass
         - pavucontrol
         - picom
         - pulseaudio
@@ -66,6 +67,13 @@
     git:
       repo: 'https://github.com/jluttine/rofi-power-menu.git'
       dest: /home/{{ user }}/git_software/rofi-power-menu/
+
+  - name: Clone rofi pass menu
+    become: yes
+    become_user: "{{ user }}"
+    git:
+      repo: 'https://github.com/carnager/rofi-pass.git'
+      dest: /home/{{ user }}/git_software/rofi-pass-menu/
 
   - name: Clone bspwm swallowing 
     become: yes
@@ -162,6 +170,13 @@
       remote_src: yes
       src: /home/{{ user }}/git_software/rofi-power-menu/rofi-power-menu
       dest: /usr/local/bin/rofi-power-menu
+      mode: '0755'
+
+  - name: Copy rofi pass menu mode
+    copy:
+      remote_src: yes
+      src: /home/{{ user }}/git_software/rofi-pass-menu/rofi-pass
+      dest: /usr/local/bin/rofi-pass-menu
       mode: '0755'
 
   - name: Install bspwm swallow 

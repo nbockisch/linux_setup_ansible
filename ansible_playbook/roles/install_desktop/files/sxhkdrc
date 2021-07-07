@@ -86,6 +86,10 @@ super + d
 super + p
   rofi -show power-menu -modi power-menu:rofi-power-menu
 
+# Launch rofi pass menu
+super + u 
+  rofi-pass-menu
+
 # Change screen brightness
 XF86MonBrightness{Up,Down}
   xbacklight {-inc,-dec} 10

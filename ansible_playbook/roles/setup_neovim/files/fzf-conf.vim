@@ -30,5 +30,5 @@ endfunction
 
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 "---------- Key Mappings ---------- 
-map <C-f> :Files<CR>
-nnoremap <C-p> :Rg<CR>
+map <leader>f :Files<CR>
+nnoremap <leader>g :Rg<CR>

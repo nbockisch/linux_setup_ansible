@@ -12,5 +12,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'airblade/vim-rooter'
-
+    " Code completion
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
