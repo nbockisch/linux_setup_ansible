@@ -50,6 +50,25 @@
         - wqy-microhei
       state: present
 
+  - name: Clone StevenBlack's host file repo
+    git:
+      repo: 'https://github.com/StevenBlack/hosts.git'
+      dest: /root/hosts
+
+  - name: Copy host update systemd timer
+    copy:
+      src: "{{ item }}"
+      dest: /usr/lib/systemd/system/
+    with_items:
+      - update-hosts.timer
+      - update-hosts.service
+
+  - name: Enable host update systemd timer
+    service:
+      name: update-hosts.timer
+      state: started
+      enabled: yes
+
   - name: Clone aur software repos
     become: yes
     become_user: "{{ user }}"

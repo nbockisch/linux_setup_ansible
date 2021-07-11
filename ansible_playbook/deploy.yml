@@ -4,6 +4,6 @@
   vars_files:
   - user_vars
   roles:
-  - users_and_permissions
-  - install_desktop
-  - setup_neovim
+      - users_and_permissions
+      - install_desktop
+      - setup_neovim
