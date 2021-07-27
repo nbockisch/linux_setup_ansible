@@ -36,6 +36,7 @@
         - python-pip
         - rofi
         - rxvt-unicode
+        - tmux 
         - xdo # For bspwm swallow
       state: present
  
@@ -54,6 +55,7 @@
     git:
       repo: 'https://github.com/StevenBlack/hosts.git'
       dest: /root/hosts
+      force: yes
 
   - name: Copy host update systemd timer
     copy:
@@ -132,6 +134,7 @@
       - polybar
       - rofi
       - sxhkd
+      - tmux
       - urxvt
 
   - name: Create path for urxvt extensions
@@ -218,6 +221,14 @@
       dest: /home/{{ user }}/.config/sxhkd/sxhkdrc 
       mode: '0755'
   
+  - name: Copy tmux config file
+    become: yes
+    become_user: "{{ user }}"
+    copy:
+      src: tmux.conf
+      dest: /home/{{ user }}/.config/tmux/tmux.conf 
+      mode: '0755'
+        
   - name: Copy xinit config file
     become: yes
     become_user: "{{ user }}"
