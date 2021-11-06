@@ -27,9 +27,12 @@
         - net-tools
         - networkmanager
         - nnn
+        - nodejs
         - pass
         - pavucontrol
         - picom
+        - powerline
+        - powerline-fonts
         - pulseaudio
         - pulseaudio-alsa
         - pulseaudio-bluetooth
