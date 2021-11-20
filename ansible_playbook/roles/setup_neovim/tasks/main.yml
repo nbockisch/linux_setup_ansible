@@ -1,11 +1,13 @@
 ---
-  - name: Install neovim and fzf dependencies
+  - name: Install neovim and plugin dependencies
     pacman:
       name:
         - fzf
         - neovim
+        - nodejs
         - perl
         - ripgrep
+        - yarn
       state: present
   
   - name: Create nvim directory and install vim-plug
