@@ -6,3 +6,17 @@
         - nodejs
         - yarn
       state: present
+
+  - name: Copy emacs daemon service
+    copy:
+      src: "{{ item }}"
+      dest: /usr/lib/systemd/system/
+    with_items:
+      - emacs.service
+
+  - name: Enable emacs daemon service
+    service:
+      name: emacs.service
+      state: started
+      enabled: yes
+
