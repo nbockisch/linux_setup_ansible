@@ -1,0 +1,8 @@
+---
+  - name: Install emacs and dependencies
+    pacman:
+      name:
+        - emacs
+        - nodejs
+        - yarn
+      state: present

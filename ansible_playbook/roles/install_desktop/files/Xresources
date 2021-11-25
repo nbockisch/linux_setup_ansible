@@ -1,6 +1,7 @@
 URxvt.perl-ext-common: font-size
 
 *.font: xft:Hack Nerd Font Mono:size=12
+emacs.font: Hack Nerd Font Mono
 
 Xft.dpi: 96
 Xft.antialias: 1
