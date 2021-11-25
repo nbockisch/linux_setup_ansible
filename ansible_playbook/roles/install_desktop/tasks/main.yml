@@ -215,6 +215,14 @@
       src: /home/{{ user }}/git_software/urxvt-font-size/font-size
       dest: /home/{{ user }}/.urxvt/ext/font-size
       mode: '0755'
+  
+  - name: Ensure en_US locale exists
+    locale_gen:
+      name: en_US.UTF-8
+      state: present
+
+  - name: Make sure Nerd font glyphs can display by setting the locale
+    command: localectl set-locale LANG=en_US.UTF-8
 
   - name: Copy sxhkd config file
     become: yes
