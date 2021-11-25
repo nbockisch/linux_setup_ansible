@@ -90,6 +90,10 @@ super + p
 super + u 
   rofi-pass-menu
 
+# Launch emacs
+super + e 
+  emacs
+
 # Change screen brightness
 XF86MonBrightness{Up,Down}
   xbacklight {-inc,-dec} 10
