@@ -6,5 +6,5 @@
   roles:
       - users_and_permissions
       - install_desktop
-      - setup_emacs
+#      - setup_emacs
       - setup_neovim

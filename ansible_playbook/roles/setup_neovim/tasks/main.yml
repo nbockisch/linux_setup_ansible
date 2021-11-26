@@ -8,6 +8,7 @@
         - perl
         - ripgrep
         - yarn
+        - xclip # For copying to the system clipboard
       state: present
   
   - name: Create nvim directory and install vim-plug
