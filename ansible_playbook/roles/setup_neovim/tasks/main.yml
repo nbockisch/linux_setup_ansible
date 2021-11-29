@@ -2,61 +2,87 @@
   - name: Install neovim and plugin dependencies
     pacman:
       name:
+        - bash
+        - clang # For clangd language server
+        - cmake
+        - curl
         - fzf
+        - git
+        - gzip
         - neovim
         - nodejs
+        - npm
         - perl
         - ripgrep
-        - yarn
+        - tar
+        - unzip 
+        - wget
         - xclip # For copying to the system clipboard
+        - yarn
       state: present
   
   - name: Create nvim directory and install vim-plug
     become: yes
     become_user: "{{ user }}"
     shell:
-      cmd: curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+      cmd: git clone --depth=1 https://github.com/savq/paq-nvim.git \
+            "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/paqs/start/paq-nvim
   
-  - name: Create path for undo, plugins, and plugin settings
+  - name: Create path for undo
     become: yes
     become_user: "{{ user }}"
     file:
-      path: /home/{{ user }}/.config/nvim/{{ item }}
+      path: /home/{{ user }}/.config/nvim/undodir
       state: directory
+
+  - name: Copy main neovim config file
+    become: yes
+    become_user: "{{ user }}"
+    copy:
+      src: init.lua
+      dest: /home/{{ user }}/.config/nvim/init.lua
+      mode: '0755'
+
+  - name: Copy additional neovim config files
+    become: yes
+    become_user: "{{ user }}"
+    copy:
+      src: "{{ item }}"
+      dest: /home/{{ user }}/.config/nvim/lua/
+      mode: '0755'
     with_items:
-      - plug-settings 
-      - undodir
-      - vim-plug
-
-  - name: Copy neovim config file
-    become: yes
-    become_user: "{{ user }}"
-    copy:
-      src: init.vim
-      dest: /home/{{ user }}/.config/nvim/init.vim
-      mode: '0755'
-
-  - name: Copy neovim plugins file
-    become: yes
-    become_user: "{{ user }}"
-    copy:
-      src: plugins.vim
-      dest: /home/{{ user }}/.config/nvim/vim-plug/plugins.vim
-      mode: '0755'
+      - general.lua
+      - keys.lua
+      - plug.lua
 
   - name: Copy vim plugin config files
     become: yes
     become_user: "{{ user }}"
     copy:
       src: "{{ item }}"
-      dest: /home/{{ user }}/.config/nvim/plug-settings/
+      dest: /home/{{ user }}/.config/nvim/lua/plug-confs/
       mode: '0755'
     with_items:
-      - fzf-conf.vim
-      - polyglot-conf.vim
+      - lspsaga-conf.lua
+      - lualine-conf.lua
+      - netrw-conf.lua
+      - nvim-cmp-conf.lua
+      - nvim-lspconfig-conf.lua
+      - nvim-treesitter-conf.lua
+      - telescope-conf.lua
+
+  - name: Install language servers for LSP
+    pacman:
+      name:
+        - bash-language-server
+        - ccls
+        - lua-language-server
+        - pyright
+        - rust-analyzer
+      state: present
 
   - name: Install neovim plugins 
     become: yes
     become_user: "{{ user }}"
     shell:
-      cmd: nvim +'PlugInstall --sync' +qa 
+      cmd: nvim +'PaqInstall --sync' +qa 
