@@ -4,7 +4,14 @@
 local nvim_lsp = require('lspconfig')
 
 -- Get keybindings from keys config
-local keys = require('keys')
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  -- Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+end
 
 -- sumneko_lua requires a different config
 local sumneko_binary_path = vim.fn.exepath('lua-language-server')
@@ -45,7 +52,7 @@ require'lspconfig'.sumneko_lua.setup {
 servers = { 'pyright', 'rust_analyzer', 'bashls', 'ccls' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
-    on_attach = keys.on_attach(),
+    on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,
     }

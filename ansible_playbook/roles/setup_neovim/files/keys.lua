@@ -36,31 +36,19 @@ vim.api.nvim_set_keymap('n', '<leader>b', ':buffers<CR>', {noremap = true})
 vim.api.nvim_set_keymap('t', '<ESC>', '<C-\\><C-n>', {noremap = true})
 
 -- Function to set keys for LSP on attachment
-on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-  -- Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- Mappings.
-  local opts = { noremap=true, silent=true }
-
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts) -- Jump to declaration
-  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts) -- Jump to definition
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts) -- List all implementations for the symbol under the cursor
-  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)  -- Get information for symbol under the cursor
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts) -- Display signature information for symbol under cursor
-  buf_set_keymap('n', 'gtd', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts) -- Jumps to definition of type of symbol under cursor
-  buf_set_keymap('n', 'grn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts) -- Rename all references to symbol under cursor
-  buf_set_keymap('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts) -- Select code action
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts) -- List all references to the symbol under the cursor
-  buf_set_keymap('n', 'gld', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts) -- Open a window with diagnostics
-  buf_set_keymap('n', 'gp', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts) -- Jump to previous diagnostic
-  buf_set_keymap('n', 'gn', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts) -- Jump to next diagnostic
-
-end
+-- See nvim-lspconfig-conf.lua file for mappings
+vim.api.nvim_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', {noremap = true}) -- Jump to declaration
+vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', {noremap = true}) -- Jump to definition
+vim.api.nvim_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', {noremap = true}) -- List all implementations for the symbol under the cursor
+vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', {noremap = true})  -- Get information for symbol under the cursor
+vim.api.nvim_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', {noremap = true}) -- Display signature information for symbol under cursor
+vim.api.nvim_set_keymap('n', 'gtd', '<cmd>lua vim.lsp.buf.type_definition()<CR>', {noremap = true}) -- Jumps to definition of type of symbol under cursor
+vim.api.nvim_set_keymap('n', 'grn', '<cmd>lua vim.lsp.buf.rename()<CR>', {noremap = true}) -- Rename all references to symbol under cursor
+vim.api.nvim_set_keymap('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', {noremap = true}) -- Select code action
+vim.api.nvim_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', {noremap = true}) -- List all references to the symbol under the cursor
+vim.api.nvim_set_keymap('n', 'gld', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', {noremap = true}) -- Open a window with diagnostics
+vim.api.nvim_set_keymap('n', 'gp', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', {noremap = true}) -- Jump to previous diagnostic
+vim.api.nvim_set_keymap('n', 'gn', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', {noremap = true}) -- Jump to next diagnostic
 
 -- Key mappings for autocomplete
 local cmp = require('cmp')
@@ -102,6 +90,3 @@ vim.api.nvim_set_keymap('n', '<leader>fh', '<cmd>lua require(\'telescope.builtin
 -- <S-Tab> 	Toggle selection and move to prev selection
 -- <C-q> 	Send all items not filtered to quickfixlist (qflist)
 -- <M-q> 	Send all selected items to qflist
-
--- Make sure keybindings are usable elsewhere
-return { on_attach = on_attach }
