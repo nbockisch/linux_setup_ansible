@@ -102,3 +102,6 @@ vim.api.nvim_set_keymap('n', '<leader>fh', '<cmd>lua require(\'telescope.builtin
 -- <S-Tab> 	Toggle selection and move to prev selection
 -- <C-q> 	Send all items not filtered to quickfixlist (qflist)
 -- <M-q> 	Send all selected items to qflist
+
+-- Make sure keybindings are usable elsewhere
+return { on_attach = on_attach }
