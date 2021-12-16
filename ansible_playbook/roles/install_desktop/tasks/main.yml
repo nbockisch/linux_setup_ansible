@@ -31,6 +31,7 @@
         - pass
         - pavucontrol
         - picom
+        - python-pywal
         - powerline
         - powerline-fonts
         - pulseaudio
@@ -44,10 +45,6 @@
         - xdo # For bspwm swallow
       state: present
  
-  - name: Install pywal
-    pip:
-      name: pywal
-  
   - name: Install normal fonts
     pacman:
       name:
