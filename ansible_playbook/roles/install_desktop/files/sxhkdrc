@@ -8,7 +8,7 @@ super + r
 
 # Terminal emulator
 super + Return
-  urxvt
+  alacritty
 
 # Kill window
 super + shift + q

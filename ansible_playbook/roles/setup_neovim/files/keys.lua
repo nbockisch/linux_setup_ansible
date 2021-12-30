@@ -1,4 +1,13 @@
--- [[ Keyboard Bindings ]]
+--   _                    _             
+--  | | _____ _   _ ___  | |_   _  __ _ 
+--  | |/ / _ \ | | / __| | | | | |/ _` |
+--  |   <  __/ |_| \__ \_| | |_| | (_| |
+--  |_|\_\___|\__, |___(_)_|\__,_|\__,_|
+--            |___/                     
+--
+-- Set keybindings across all core functionality and plugins
+--
+
 -- Leader
 vim.g.mapleader = ' '
 
@@ -26,17 +35,41 @@ vim.api.nvim_set_keymap('n', '<leader>c',
     ':execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>', 
     {noremap = true})
 
--- Toggle file explorer
-vim.api.nvim_set_keymap('n', '<leader>e', ':Lex<CR>', {noremap = true})
-
--- Show buffer list
-vim.api.nvim_set_keymap('n', '<leader>b', ':buffers<CR>', {noremap = true})
-
 -- Exit terminal mode with ESC
 vim.api.nvim_set_keymap('t', '<ESC>', '<C-\\><C-n>', {noremap = true})
 
--- Function to set keys for LSP on attachment
--- See nvim-lspconfig-conf.lua file for mappings
+-- Toggle file explorer
+vim.api.nvim_set_keymap('n', '<leader>e', ':Lex<CR>', {noremap = true})
+
+-- Relescope keybindings
+vim.api.nvim_set_keymap('n', '<leader>ff', '<cmd>lua require(\'telescope.builtin\').find_files()<CR>', 
+{noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>fg', '<cmd>lua require(\'telescope.builtin\').live_grep()<CR>', {
+noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>fb', '<cmd>lua require(\'telescope.builtin\').buffers()<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>fh', '<cmd>lua require(\'telescope.builtin\').help_tags()<CR>', {noremap = true})
+-- Default keybindings for telescope
+-- <C-n>/<Down>         Next item
+-- <C-p>/<Up>   Previous item
+-- j/k  Next/previous (in normal mode)
+-- H/M/L        Select High/Middle/Low (in normal mode)
+-- 'gg/G'       Select the first/last item (in normal mode)
+-- <CR>         Confirm selection
+-- <C-x>        Go to file selection as a split
+-- <C-v>        Go to file selection as a vsplit
+-- <C-t>        Go to a file in a new tab
+-- <C-u>        Scroll up in preview window
+-- <C-d>        Scroll down in preview window
+-- <C-/>        Show mappings for picker actions (insert mode)
+-- ?    Show mappings for picker actions (normal mode)
+-- <C-c>        Close telescope
+-- <Esc>        Close telescope (in normal mode)
+-- <Tab>        Toggle selection and move to next selection
+-- <S-Tab>      Toggle selection and move to prev selection
+-- <C-q>        Send all items not filtered to quickfixlist (qflist)
+-- <M-q>        Send all selected items to qflist
+
+-- Lsp keybindings
 vim.api.nvim_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', {noremap = true}) -- Jump to declaration
 vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', {noremap = true}) -- Jump to definition
 vim.api.nvim_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', {noremap = true}) -- List all implementations for the symbol under the cursor
@@ -50,43 +83,5 @@ vim.api.nvim_set_keymap('n', 'gld', '<cmd>lua vim.lsp.diagnostic.show_line_diagn
 vim.api.nvim_set_keymap('n', 'gp', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', {noremap = true}) -- Jump to previous diagnostic
 vim.api.nvim_set_keymap('n', 'gn', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', {noremap = true}) -- Jump to next diagnostic
 
--- Key mappings for autocomplete
-local cmp = require('cmp')
-
-nvim_cmp_mapping = {
-  ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-  ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-  ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-  ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-  ['<C-e>'] = cmp.mapping({
-	i = cmp.mapping.abort(),
-	c = cmp.mapping.close(),
-  }),
-  ['<CR>'] = cmp.mapping.confirm({ select = true }),
-}
-
--- Key mappings for telescope
-vim.api.nvim_set_keymap('n', '<leader>ff', '<cmd>lua require(\'telescope.builtin\').find_files()<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>fg', '<cmd>lua require(\'telescope.builtin\').live_grep()<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>fb', '<cmd>lua require(\'telescope.builtin\').buffers()<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>fh', '<cmd>lua require(\'telescope.builtin\').help_tags()<CR>', {noremap = true})
--- Default keybindings for telescope
--- <C-n>/<Down> 	Next item
--- <C-p>/<Up> 	Previous item
--- j/k 	Next/previous (in normal mode)
--- H/M/L 	Select High/Middle/Low (in normal mode)
--- 'gg/G' 	Select the first/last item (in normal mode)
--- <CR> 	Confirm selection
--- <C-x> 	Go to file selection as a split
--- <C-v> 	Go to file selection as a vsplit
--- <C-t> 	Go to a file in a new tab
--- <C-u> 	Scroll up in preview window
--- <C-d> 	Scroll down in preview window
--- <C-/> 	Show mappings for picker actions (insert mode)
--- ? 	Show mappings for picker actions (normal mode)
--- <C-c> 	Close telescope
--- <Esc> 	Close telescope (in normal mode)
--- <Tab> 	Toggle selection and move to next selection
--- <S-Tab> 	Toggle selection and move to prev selection
--- <C-q> 	Send all items not filtered to quickfixlist (qflist)
--- <M-q> 	Send all selected items to qflist
+-- Nvim-cmp keybindings
+-- Check nvim-cmp config for keybindings

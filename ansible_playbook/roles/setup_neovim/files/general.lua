@@ -1,36 +1,55 @@
---[[ Basic editor settings ]]
+--                                  _   _             
+--   __ _  ___ _ __   ___ _ __ __ _| | | |_   _  __ _ 
+--  / _` |/ _ \ '_ \ / _ \ '__/ _` | | | | | | |/ _` |
+-- | (_| |  __/ | | |  __/ | | (_| | |_| | |_| | (_| |
+--  \__, |\___|_| |_|\___|_|  \__,_|_(_)_|\__,_|\__,_|
+--  |___/                                             
+--
+-- General editor settings not tied to any plugins
+--
 
-vim.opt.compatible = false
-vim.opt.errorbells = false
-vim.opt.hidden = true 
-vim.opt.swapfile = false
-vim.opt.undofile = true
+-- General settings
+vim.o.compatible = false vim.o.errorbells = false
+vim.o.hidden = true
+vim.o.swapfile = false
+vim.bo.undofile = true
 vim.o.undodir = os.getenv("HOME") .. '/.config/nvim/undodir'
 
 -- Editor appearance settings
-vim.opt.relativenumber = true
-vim.opt.scrolloff = 8
-vim.opt.signcolumn = "yes"
-vim.opt.wrap = false
+vim.wo.relativenumber = true
+vim.wo.scrolloff = 8
+vim.wo.signcolumn = "yes"
+vim.wo.wrap = false
+vim.o.title = true
 
--- Search settings
-vim.opt.hlsearch = false
-vim.opt.ignorecase = true
-vim.opt.incsearch = true 
-vim.opt.smartcase = true
+-- Colors
+vim.o.termguicolors = true
 
--- Split settings
-vim.opt.splitbelow = true
-vim.opt.splitright = true
+vim.o.background = "dark"
+vim.g.gruvbox_material_background = "hard"
+vim.cmd "colorscheme gruvbox-material"
 
 -- Tab settings
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-vim.opt.smartindent = true
+vim.bo.tabstop = 4
+vim.bo.softtabstop = 4
+vim.bo.shiftwidth = 4
+vim.bo.expandtab = true
+vim.bo.smartindent = true
 
--- Set color
--- vim.opt.termguicolors = false
-vim.opt.background = 'dark'
-vim.cmd 'colorscheme PaperColor'
+-- Search settings
+vim.o.hlsearch = false
+vim.o.ignorecase = true
+vim.o.incsearch = true 
+vim.o.smartcase = true
+
+-- Split settings
+vim.o.splitbelow = true
+vim.o.splitright = true
+
+-- Netrw settings
+vim.g['netrw#netrw_altfile'] = 1
+vim.g['netrw#netrw_altv'] = 1
+vim.g['netrw#netrw_banner'] = 0
+vim.g['netrw#netrw_browse_split'] = 3
+vim.g['netrw#netrw_liststyle'] = 3
+vim.g['netrw#netrw_winsize'] = 25

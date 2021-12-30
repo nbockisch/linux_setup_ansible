@@ -1,7 +1,13 @@
--- [[ init.lua: Nathan Bockisch, 2021 ]]
+--  _       _ _     _             
+-- (_)_ __ (_) |_  | |_   _  __ _ 
+-- | | '_ \| | __| | | | | |/ _` |
+-- | | | | | | |_ _| | |_| | (_| |
+-- |_|_| |_|_|\__(_)_|\__,_|\__,_|
+--
+-- First config file read by neovim, used to
+-- load the rest
+--
 
--- Source config files
-
+require('plugins') -- Make sure Paq is installed before anything else
 require('general')
 require('keys')
-require('plug')

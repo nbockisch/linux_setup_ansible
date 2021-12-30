@@ -15,6 +15,7 @@
     pacman:
       name:
         - acpi
+        - alacritty
         - alsa-utils
         - base-devel
         - fd
@@ -39,7 +40,6 @@
         - pulseaudio-bluetooth
         - python-pip
         - rofi
-        - rxvt-unicode
         - tmux 
         - xclip # For copying wth tmux
         - xdo # For bspwm swallow
@@ -104,13 +104,6 @@
       repo: 'https://github.com/salman-abedin/bspwm_swallow.git'
       dest: /home/{{ user }}/git_software/bspwm_swallow/
         
-  - name: Clone urxvt font size extension
-    become: yes
-    become_user: "{{ user }}"
-    git:
-      repo: 'https://github.com/majutsushi/urxvt-font-size.git'
-      dest: /home/{{ user }}/git_software/urxvt-font-size/
-
   - name: Install aur software
     become: yes
     become_user: "{{ user }}"
@@ -129,6 +122,7 @@
       path: /home/{{ user }}/.config/{{ item }}
       state: directory
     with_items:
+      - alacritty
       - bspwm
       - lemonbar
       - picom
@@ -136,7 +130,6 @@
       - rofi
       - sxhkd
       - tmux
-      - urxvt
 
   - name: Create path for urxvt extensions
     become: yes
@@ -206,13 +199,6 @@
     make:
       chdir: /home/{{ user }}/git_software/bspwm_swallow/
       target: install
-
-  - name: Copy urxvt font size script
-    copy:
-      remote_src: yes
-      src: /home/{{ user }}/git_software/urxvt-font-size/font-size
-      dest: /home/{{ user }}/.urxvt/ext/font-size
-      mode: '0755'
   
   - name: Ensure en_US locale exists
     locale_gen:
@@ -245,12 +231,12 @@
       src: xinitrc
       dest: /home/{{ user }}/.xinitrc
 
-  - name: Copy xresources config file
+  - name: Copy alacritty config file
     become: yes
     become_user: "{{ user }}"
     copy:
-      src: Xresources
-      dest: /home/{{ user }}/.config/urxvt/Xresources
+      src: alacritty.yml
+      dest: /home/{{ user }}/.config/alacritty/alacritty.yml
   
   - name: Create path for wallpapers
     become: yes

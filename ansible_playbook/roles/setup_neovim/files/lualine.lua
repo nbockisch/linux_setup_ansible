@@ -1,4 +1,14 @@
-require'lualine'.setup {
+--  _             _ _              _             
+-- | |_   _  __ _| (_)_ __   ___  | |_   _  __ _ 
+-- | | | | |/ _` | | | '_ \ / _ \ | | | | |/ _` |
+-- | | |_| | (_| | | | | | |  __/_| | |_| | (_| |
+-- |_|\__,_|\__,_|_|_|_| |_|\___(_)_|\__,_|\__,_|
+-- 
+--
+-- Configure the lualine bar
+--
+
+require("lualine").setup {
   options = {
     icons_enabled = true,
     theme = 'auto',
@@ -9,8 +19,7 @@ require'lualine'.setup {
   },
   sections = {
     lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff',
-                  {'diagnostics', sources={'nvim_lsp', 'coc'}}},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
     lualine_c = {'filename'},
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},
