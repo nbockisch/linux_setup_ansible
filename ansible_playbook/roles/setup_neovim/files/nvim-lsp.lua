@@ -28,6 +28,7 @@ local servers = {
     "bashls",
     "clangd",
     "pyright",
+    "rust_analyzer",
     "sumneko_lua"
 }
 
