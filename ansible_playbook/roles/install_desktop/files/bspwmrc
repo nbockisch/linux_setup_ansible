@@ -32,4 +32,4 @@ ${HOME}/.config/polybar/start_bar.sh
 #${HOME}/.config/lemonbar/bar.sh | lemonbar -f "Hack Regular Nerd Font Complete:normal:size=10" -g 264x30+15+10
 
 # Start picom
-picom -Cc &
+picom -c &
