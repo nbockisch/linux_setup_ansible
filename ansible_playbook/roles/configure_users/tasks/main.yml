@@ -1,0 +1,52 @@
+---
+- name: Add the wheel group
+  group:
+    gid: 2024
+    name: wheel
+    state: present
+
+- name: Add the user accounts
+  user:
+    name: "{{ item }}"
+    shell: /bin/bash
+    group: wheel
+  with_items:
+  - "{{ users }}"
+
+- name: Create directory for ssh keys
+  file:
+    path: "/home/{{ item }}/.ssh"
+    owner: "{{ item }}"
+    state: directory
+  become: yes
+  become_user: "{{ item }}"
+  with_items:
+  - "{{ users }}"
+
+- name: Generate user ssh keys
+  community.crypto.openssh_keypair:
+    path: "/home/{{ item }}/.ssh/id_ecdsa"
+    type: "ecdsa"
+  with_items:
+  - "{{ users }}"
+
+- name: Add the ssh key
+  command: "eval `ssh-agent` && ssh-add ~/.ssh/id_ecdsa"
+  become: yes
+  become_user: "{{ item }}"
+  with_items:
+  - "{{ users }}"
+
+- name: Install sudoers for user permissions
+  pacman:
+    name:
+    - sudo
+    state: present
+
+- name: Copy the sudoers file
+  copy:
+    src: sudoers
+    dest: /etc/sudoers
+    owner: root
+    group: root
+    mode: "0440"

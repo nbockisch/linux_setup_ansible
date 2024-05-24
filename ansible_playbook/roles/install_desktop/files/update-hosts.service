@@ -1,6 +1,0 @@
-[Unit]
-Description=Update hosts file daily
-
-[Service]
-WorkingDirectory=/root/hosts
-ExecStart=python3 /root/hosts/updateHostsFile.py --auto --replace --flush-dns-cache --extensions social porn gambling

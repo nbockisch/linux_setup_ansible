@@ -1,9 +1,13 @@
 ---
-- hosts: user_machines
+- hosts: pc
   remote_user: root
   vars_files:
-  - user_vars
+  - vars
   roles:
-      - users_and_permissions
-      - install_desktop
-      - setup_neovim
+  - configure_users # Sets up user accounts
+  - configure_desktop # Sets up window manager and desktop environment
+  - configure_apps # Sets up user applications
+
+# Installation steps:
+# 1. Set up users and sudoers
+# 2. Install dotfiles and dependencies

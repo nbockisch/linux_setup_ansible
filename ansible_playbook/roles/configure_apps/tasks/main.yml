@@ -1,0 +1,139 @@
+---
+- name: Install shells
+  pacman:
+    name:
+    - bash
+    - zsh
+    state: present
+
+- name: Install the terminal emulator
+  pacman:
+    name:
+    - alacritty
+    state: present
+
+- name: Install the file browser
+  pacman:
+    name:
+    - lf
+    state: present
+
+- name: Install pacman dependencies for installing the AUR installer
+  pacman:
+    name:
+    - base-devel
+    - rustup
+    state: present
+
+- name: Install rust dependencies for installing the AUR installer
+  command: "rustup default stable"
+  become: true
+  become_user: "{{ item }}"
+  with_items:
+  - "{{ users }}"
+
+- name: Install git for cloning AUR installer and config files
+  pacman:
+    name:
+    - git
+    state: present
+
+- name: Create directory for software installed by git repos
+  file:
+    path: "/home/{{ item }}/install_repos"
+    owner: "{{ item }}"
+    state: directory
+  become: yes
+  become_user: "{{ item }}"
+  with_items:
+  - "{{ users }}"
+
+- name: Clone the AUR installer
+  git:
+    repo: "https://aur.archlinux.org/paru.git"
+    dest: "/home/{{ item }}/install_repos/paru"
+  become: true
+  become_user: "{{ item }}"
+  with_items:
+  - "{{ users }}"
+
+- name: Install the AUR installer
+  command: "echo '2' | makepkg -si"
+  args:
+    chdir: "/home/{{ item }}/install_repos/paru"
+  become: true
+  become_user: "{{ item }}"
+  with_items:
+  - "{{ users }}"
+
+- name: Install the image visualizer for the file browser
+  command: "echo '1' | paru -S ctpv --skipreview"
+  become: true
+  become_user: "{{ item }}"
+  with_items:
+  - "{{ users }}"
+
+- name: Install the text editor and dependencies
+  pacman:
+    name:
+    - neovim
+    - go
+    - npm
+    - texlive
+    - tree-sitter
+    - tree-sitter-cli
+    - unzip
+    state: present
+
+- name: Install the terminal multiplexor
+  pacman:
+    name:
+    - tmux
+    state: present
+
+- name: Install the browser
+  pacman:
+    name:
+    - firefox
+    state: present
+
+- name: Install quality of life applications
+  pacman:
+    name:
+    - bat
+    - exa
+    - ripgrep
+    - rsync
+    - duf
+    - dust
+    - fd
+    state: present
+
+- name: Install tools for configuring the applications
+  pacman:
+    name:
+    - stow
+    state: present
+
+- name: Install git for cloning dotfiles
+  pacman:
+    name:
+    - git
+    state: present
+
+- name: Clone the dotfiles repo for all users
+  git:
+    repo: "{{ dotfiles }}"
+    dest: "/home/{{ item }}/.dotfiles"
+  become: true
+  become_user: "{{ item }}"
+  with_items:
+  - "{{ users }}"
+
+- name: Apply configurations for the applications
+  command: "stow {{ item.1 }}"
+  args:
+    chdir: "/home/{{ item.0 }}/.dotfiles"
+  become: true
+  become_user: "{{ item.0 }}"
+  loop: "{{ users | product(user_apps) | list }}"

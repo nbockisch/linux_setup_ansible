@@ -1,0 +1,135 @@
+---
+- name: Install xserver
+  pacman:
+    name:
+    - xorg-server
+    - xorg-apps
+    - xorg-xinit
+    state: present
+
+- name: Install the window manager
+  pacman:
+    name:
+    - bspwm
+    state: present
+
+- name: Install the hotkey daemon
+  pacman:
+    name:
+    - sxhkd
+    state: present
+
+- name: Install the status bar
+  pacman:
+    name:
+    - polybar
+    state: present
+
+- name: Install the font(s) for the desktop components
+  pacman:
+    name:
+    - ttf-iosevka-nerd
+    state: present
+
+- name: Install the font(s) for the desktop components
+  pacman:
+    name:
+    - ttf-iosevka-nerd
+    state: present
+
+- name: Install the application launcher
+  pacman:
+    name:
+    - rofi
+    state: present
+
+- name: Install the compositor
+  pacman:
+    name:
+    - picom
+    state: present
+
+- name: Install pacman dependencies for installing the AUR installer
+  pacman:
+    name:
+    - base-devel
+    - rustup
+    state: present
+
+- name: Install rust dependencies for installing the AUR installer
+  command: "rustup default stable"
+  become: true
+  become_user: "{{ item }}"
+  with_items:
+  - "{{ users }}"
+
+- name: Install git for cloning AUR installer and config files
+  pacman:
+    name:
+    - git
+    state: present
+
+- name: Create directory for software installed by git repos
+  file:
+    path: "/home/{{ item }}/install_repos"
+    owner: "{{ item }}"
+    state: directory
+  become: yes
+  become_user: "{{ item }}"
+  with_items:
+  - "{{ users }}"
+
+- name: Clone the AUR installer
+  git:
+    repo: "https://aur.archlinux.org/paru.git"
+    dest: "/home/{{ item }}/install_repos/paru"
+  become: true
+  become_user: "{{ item }}"
+  with_items:
+  - "{{ users }}"
+
+- name: Install the AUR installer
+  command: "echo '2' | makepkg -si"
+  args:
+    chdir: "/home/{{ item }}/install_repos/paru"
+  become: true
+  become_user: "{{ item }}"
+  with_items:
+  - "{{ users }}"
+
+- name: Install the lock screen
+  command: "echo '1' | paru -S betterlockscreen --skipreview"
+  become: true
+  become_user: "{{ item }}"
+  with_items:
+  - "{{ users }}"
+
+- name: Install the brightness controller
+  command: "echo '1' | paru -S brillo --skipreview"
+  become: true
+  become_user: "{{ item }}"
+  with_items:
+  - "{{ users }}"
+
+- name: Install tools for configuring the desktop
+  pacman:
+    name:
+    - stow
+    state: present
+
+- name: Clone the dotfiles repo for all users
+  git:
+    repo: "{{ dotfiles }}"
+    dest: "/home/{{ item }}/.dotfiles"
+  become: true
+  become_user: "{{ item }}"
+  with_items:
+  - "{{ users }}"
+
+- name: Apply configurations for the desktop environment
+  command: "stow {{ item.1 }}"
+  args:
+    chdir: "/home/{{ item.0 }}/.dotfiles"
+  become: true
+  become_user: "{{ item.0 }}"
+  loop: "{{ users | product(desktop_apps) | list }}"

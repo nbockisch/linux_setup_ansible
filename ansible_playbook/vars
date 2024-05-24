@@ -1,0 +1,23 @@
+users:
+- nathan
+
+dotfiles: https://github.com/nbockisch/dotfiles.git
+
+# Used to install dotfile configs with stow
+desktop_apps:
+- xserver
+- bspwm
+- sxhkd
+- polybar
+- rofi
+- picom
+- betterlockscreen
+- scripts
+
+user_apps:
+- alacritty
+- bash
+- ctpv
+- lf
+- nvim
+- tmux

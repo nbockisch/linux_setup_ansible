@@ -1,0 +1,6 @@
+root	ALL=(ALL:ALL) ALL
+
+# Members of the wheel group may gain root privileges
+%wheel	ALL=(ALL:ALL) NOPASSWD: ALL
+
+#includedir /etc/sudoers.d
