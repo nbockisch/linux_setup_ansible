@@ -113,6 +113,7 @@
     - duf
     - dust
     - fd
+    - zoxide
     state: present
 
 - name: Install tools for configuring the applications
