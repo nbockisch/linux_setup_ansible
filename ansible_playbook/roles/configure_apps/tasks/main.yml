@@ -85,6 +85,12 @@
     - unzip
     state: present
 
+- name: Install other dev tools
+  pacman:
+    name:
+    - k9s
+    state: present
+
 - name: Install the terminal multiplexor
   pacman:
     name:
